@@ -1,0 +1,32 @@
+name: RISC-V CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-riscv64-unknown-elf qemu-user-static
+
+      - name: Build project
+        run: make
+
+      - name: Run tests
+        run: make test
+
+      - name: Upload binaries
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: riscv-binaries
+          path: bin/
