@@ -1,0 +1,15 @@
+/bin/
+*.o
+*.elf
+*.bin
+*.hex
+*.out
+*.qemu
+*.gdb
+*.log
+*.tmp
+*.swp
+*~
+/artifacts/
+/test-results/
+.vscode/
